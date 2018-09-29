@@ -1,0 +1,30 @@
+good_number = r'[-+]?(\d*\.\d+)'
+integer = 	  r'[-+]?(\d)+'
+
+comma_number = r'[-+]?(\d*[,]\d+)'
+
+number = good_number / comma_number / integer
+
+id = r'(\w)+'
+sp = r'[ \v\t]+'
+
+newline_win = '\r\n'
+newline_linux = '\n'
+newline_mac =	'\r'
+
+eol = newline_win / newline_linux / newline_mac / EOF
+
+col_id = id
+g_id = id
+
+header_sp_missing = ''
+
+header_line =  sp? '///' (sp / header_sp_missing) (sp? col_id)* sp? eol
+cor_line = sp? g_id (sp number)+ sp? eol
+blank_line = sp? (newline_win / newline_linux / newline_mac)
+gedfile = blank_line* header_line? (cor_line / blank_line)*
+
+
+
+
+
